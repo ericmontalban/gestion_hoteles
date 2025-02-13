@@ -3,7 +3,7 @@
 </script>
 
 <template>  
-    <h1>Estas son mis imágenes</h1>
+    <h1 class="text-3xl font-bold text-black-500">Bienvenido a Vue con Vite 🚀</h1>
 </template>
 
 <style scoped>

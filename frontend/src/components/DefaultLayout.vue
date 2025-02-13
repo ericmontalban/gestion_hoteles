@@ -1,15 +1,44 @@
 <script setup>
+import axiosClient from '../axios';
+import router from "../router.js"
+import useUserStore from '../store/user.js';
+import { computed } from "vue";
+
+const userStore = useUserStore()
+
+// Obtiene el usuario actual desde el store de pinia
+const user = computed(() => userStore.user) 
+
+function logout() {
+    axiosClient.post('logout') // Llama a la API de logout en el backend
+      .then((response) => {
+        router.push({name: 'Login'}) // // Redirige a la pantalla de login tras cerrar sesión
+      })
+}
+
 </script>
 
 <template>
-  <div>
-    <nav class="p-4 bg-gray-200">
-      <router-link to="/" class="mr-4">Inicio</router-link>
-      <router-link to="/images" class="mr-4">Mis Imágenes</router-link>
-      <router-link to="/login" class="mr-4">Iniciar Sesión</router-link>
-      <router-link to="/signup">Registrarse</router-link>
+  <div class="min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="w-full bg-gray-800 text-white p-4 flex justify-between items-center">
+      <span class="text-lg font-semibold">Gestión de Hoteles</span>
+
+      <!-- Mostrar usuario y botón de logout si hay sesión activa -->
+      <div v-if="user" class="flex items-center space-x-4">
+        <span class="text-sm">{{ user.name }}</span>
+        <button 
+          @click="logout" 
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          Cerrar sesión
+        </button>
+      </div>
     </nav>
-    <RouterView />
+
+    <!-- Contenido de la página -->
+    <div class="flex-grow p-4">
+      <RouterView />
+    </div>
   </div>
 </template>
 
