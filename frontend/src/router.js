@@ -1,11 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router";
 import DefaultLayout from "./components/DefaultLayout.vue"; // Asegurar que este archivo existe
 import Home from "./pages/Home.vue";
-import MyImages from "./pages/MyImages.vue";
 import Login from "./pages/Login.vue"; 
 import Signup from "./pages/Signup.vue"; 
 import NotFound from "./pages/NotFound.vue";
 import useUserStore from "./store/user";
+import HotelList from "./pages/hoteles/HotelList.vue";
+import HotelForm from "./pages/hoteles/HotelForm.vue";
 
 const routes = [
     {
@@ -15,7 +16,14 @@ const routes = [
                     // Esto es especialmente util para que todas las paginas hereden de una que muestre 
                     // el footer, el header, etc
             {path: '/', name: 'Home', component: Home},
-            //{path: '/images', name: 'MyImages', component: MyImages}, 
+
+            // Agregamos la gestión de hoteles dentro del DefaultLayout
+            { path: "/hoteles", name: "HotelList", component: HotelList},
+            { path: "/hoteles/nuevo", name: "HotelForm", component: HotelForm},
+            /*
+            { path: "/hoteles/nuevo", name: "HotelForm", component: HotelForm, meta: { requiresAuth: true } },
+            { path: "/hoteles/editar/:id", name: "HotelEdit", component: HotelEdit, meta: { requiresAuth: true } },
+             */
         ],
         beforeEnter: async (to, from, next) => {
             try {

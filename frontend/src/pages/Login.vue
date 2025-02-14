@@ -8,7 +8,7 @@
         password: ''
     })
     
-    const errorMessage = ref('')
+    const errorMessage = ref('') // Para manejar errores del backend
 
     function submit() {
         axiosClient.get('/sanctum/csrf-cookie')
