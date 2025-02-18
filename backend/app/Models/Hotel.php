@@ -17,4 +17,10 @@ class Hotel extends Model
         'email',
         'sitioWeb',
     ];
+
+    // Relación uno a muchos: un hotel tiene muchas habitaciones
+    public function habitaciones()
+    {
+        return $this->hasMany(Habitacion::class); // Relación con Habitacion
+    }
 }

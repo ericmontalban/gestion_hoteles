@@ -18,28 +18,14 @@ const nuevoHotel = ref({
 
 const errorMessage = ref(""); // Para almacenar errores del backend
 
-// Función para agregar un nuevo hotel con CSRF
-const agregarHotel = async () => {
-  if (!nuevoHotel.value.nombre || !nuevoHotel.value.direccion) {
-    errorMessage.value = "Por favor, rellena al menos el nombre y la dirección.";
-    return;
-  }
-
-  try {
-    /*
-    // 1. Obtener la cookie CSRF antes de hacer la solicitud
-    await axiosClient.get("/sanctum/csrf-cookie");
-    */
-    // 2️. Enviar los datos del hotel al backend
-    await axiosClient.post("/api/hoteles", nuevoHotel.value);
-
-    // 3️. Redirigir a la lista de hoteles después de crear
+async function agregarHotel() {
+    if (!nuevoHotel.value.nombre || !nuevoHotel.value.direccion) {
+      errorMessage.value = "Por favor, rellena al menos el nombre y la dirección.";
+      return;
+    }
+    await hotelesStore.addHotel(nuevoHotel.value); // Espera a que la API termine de registrar el hotel para no redirigir demasiado rapido
     router.push("/hoteles");
-  } catch (error) {
-    console.error("Error al agregar hotel:", error.response);
-    errorMessage.value = error.response?.data?.message || "Error al agregar el hotel.";
-  }
-};
+}
 </script>
 
 <template>
@@ -50,7 +36,7 @@ const agregarHotel = async () => {
           {{errorMessage}}
     </div>
 
-    <form @submit.prevent="agregarHotel" class="space-y-4">
+    <form @submit.prevent="agregarHotel(nuevoHotel)" class="space-y-4">
       <input v-model="nuevoHotel.nombre" placeholder="Nombre del hotel" class="border p-2 w-full" />
       <input v-model="nuevoHotel.direccion" placeholder="Dirección" class="border p-2 w-full" />
       <input v-model="nuevoHotel.telefono" placeholder="Teléfono" class="border p-2 w-full" />

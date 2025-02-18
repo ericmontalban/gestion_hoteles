@@ -13,29 +13,28 @@ const useHotelesStore = defineStore("hoteles", {
     actions: {
         // Método para obtener la lista de hoteles desde la API
         // Read de CRUD
-        async fetchHoteles() {
+        async getHoteles() {
             this.loading = true; // Activar loading
             try {
                 const response = await axiosClient.get("/api/hoteles"); // solicitar a la api los hoteles
-                console.log("Hoteles obtenidos:", response.data); 
+                console.log("Hoteles obtenidos:", response.data); // muestra la lista en la consola de dev tools
                 this.hoteles = response.data; // Guardar los datos en el estado de pinia
             } catch (error) {
                 console.error("Error obteniendo hoteles:", error);
             } finally {
-                this.loading = false; // Desactivar loading
+                this.loading = false; // Desactivar loading una vez se han cargado los hoteles
             }
         },
 
         // Método para agregar un nuevo hotel
-        addHotel(nuevoHotel) {
-            return axiosClient.post('/api/hoteles', nuevoHotel)
-                .then(({ data }) => {
-                    console.log("Hotel agregado:", data);
-                    this.hoteles.push(data); // Agregamos el nuevo hotel a la lista
-                })
-                .catch(error => {
-                    console.error("Error agregando hotel:", error);
-                });
+        async addHotel(nuevoHotel) {
+            try {
+                const response =  await axiosClient.post('/api/hoteles', nuevoHotel);
+                console.log("Hotel agregado:", response.data);
+                this.hoteles.push(data); // Agregamos el nuevo hotel a la lista del store
+            } catch (error) {
+                console.error("Error agregando hotel:", error);
+            }
         },
 
         // Método para actualizar un hotel existente
@@ -51,15 +50,16 @@ const useHotelesStore = defineStore("hoteles", {
         },
 
         // Método para eliminar un hotel
-        deleteHotel(id) {
-            return axiosClient.delete(`/api/hoteles/${id}`)
-                .then(() => {
-                    console.log(`Hotel ${id} eliminado.`);
-                    this.hoteles = this.hoteles.filter(hotel => hotel.id !== id); // Eliminamos el hotel del estado
-                })
-                .catch(error => {
-                    console.error("Error eliminando hotel:", error);
-                });
+        async deleteHotel(id) {
+            try {
+                await axiosClient.delete(`/api/hoteles/${id}`);
+                console.log(`Hotel ${id} eliminado.`);
+                // Nos quedamos en el store con los hoteles cuyo id sea distinto al eliminado
+                this.hoteles = this.hoteles.filter(hotel => hotel.id !== id); 
+            } catch (error) {
+                console.error("Error eliminando hotel:", error);
+                throw error;
+            }
         },
     }
 });

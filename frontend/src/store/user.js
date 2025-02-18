@@ -4,7 +4,7 @@ import {defineStore} from "pinia";
 import axiosClient from "../axios";
 
 const useUserStore = defineStore('user', {
-    state: () => ({ // Define el estado del usuario en la aplicación
+    state: () => ({ // Define el estado   del usuario en la aplicación
         user:null
     }),
     actions: {

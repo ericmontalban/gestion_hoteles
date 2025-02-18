@@ -58,6 +58,13 @@ class HotelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $hotel = Hotel::find($id); // Busca el hotel en la base de datos
+
+        if (!$hotel) {
+            return response()->json(['message' => 'Hotel no encontrado'], 404);
+        }
+
+        $hotel->delete();
+        return response()->json(['message' => 'Hotel eliminado correctamente'], 200);
     }
 }
