@@ -8,6 +8,7 @@ import useUserStore from "./store/user";
 import HotelList from "./pages/hoteles/HotelList.vue";
 import HotelForm from "./pages/hoteles/HotelForm.vue";
 import HotelEdit from "./pages/hoteles/HotelEdit.vue";
+import HabitacionForm from "./pages/habitaciones/HabitacionForm.vue";
 
 const routes = [
     {
@@ -21,7 +22,8 @@ const routes = [
             // Agregamos la gestión de hoteles dentro del DefaultLayout
             { path: "/hoteles", name: "HotelList", component: HotelList},
             { path: "/hoteles/nuevo", name: "HotelForm", component: HotelForm},
-            { path: "/hoteles/editar/:id", name: "HotelEdit", component: HotelEdit} // :id es un parametro dinamico que representa el hotel a editar
+            { path: "/hoteles/:id/habitaciones", name: "HotelEdit", component: HotelEdit}, // :id es un parametro dinamico que representa el hotel a editar
+            { path: "/hoteles/:id/habitaciones/nueva", name: "HabitacionForm", component: HabitacionForm}
         ],
         beforeEnter: async (to, from, next) => {
             try {
