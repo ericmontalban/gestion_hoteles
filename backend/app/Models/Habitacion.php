@@ -16,8 +16,14 @@ class Habitacion extends Model
         'precio_por_noche'
     ];
 
+    // Establecemos la relacion con hotel
     public function hotel()
     {
-        return $this->belongsTo(Hotel::class); // Relación inversa con Hotel
+        return $this->belongsTo(Hotel::class);
+    }
+
+    // Establecemos la relacion con huesped
+    public function huespedes() {
+        return $this->hasMany(Huesped::class);
     }
 }

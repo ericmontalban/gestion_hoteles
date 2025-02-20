@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute } from "vue-router";
 import router from "../../router.js"
 import useHotelesStore from "../../store/hoteles.js";
@@ -10,12 +10,6 @@ const route = useRoute();
 const hotelesStore = useHotelesStore();
 const habitacionesStore = useHabitacionesStore();
 const hotelId = route.params.id; // Obtener el ID del hotel de la URL
-/*
-const nombreHotel = computed(() => {
-    const hotel = hotelesStore.hoteles.find(hotel => hotel.id == hotelId);
-    return hotel.nombre;
-});
-*/
 
 const nombreHotel = ref("");
 
@@ -25,15 +19,13 @@ onMounted(async() => {
     const hotel = hotelesStore.hoteles.find(hotel => hotel.id === parseInt(hotelId)); //paseInt porque hotelId de route.params.id viene como string
     nombreHotel.value = hotel.nombre;
     await habitacionesStore.getHabitaciones(hotelId);
-    
 });
 
 async function editarHabitacion(idHabitacion) {
-    router.push(`/hoteles/${hotelId}/habitaciones/${idHabitacion}`);
+    router.push(`/hoteles/${hotelId}/habitaciones/${idHabitacion}/huespedes`);
 }
 
 async function eliminarHabitacion (habitacionId) {
-    debugger;
     await habitacionesStore.deleteHabitacion(hotelId, habitacionId);
 }
 </script>

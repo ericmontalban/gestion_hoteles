@@ -9,6 +9,8 @@ import HotelList from "./pages/hoteles/HotelList.vue";
 import HotelForm from "./pages/hoteles/HotelForm.vue";
 import HotelEdit from "./pages/hoteles/HotelEdit.vue";
 import HabitacionForm from "./pages/habitaciones/HabitacionForm.vue";
+import HuespedesList from "./pages/huespedes/HuespedesList.vue";
+//import HuespedForm from "./pages/huespedes/HuespedForm.vue";
 
 const routes = [
     {
@@ -23,7 +25,11 @@ const routes = [
             { path: "/hoteles", name: "HotelList", component: HotelList},
             { path: "/hoteles/nuevo", name: "HotelForm", component: HotelForm},
             { path: "/hoteles/:id/habitaciones", name: "HotelEdit", component: HotelEdit}, // :id es un parametro dinamico que representa el hotel a editar
-            { path: "/hoteles/:id/habitaciones/nueva", name: "HabitacionForm", component: HabitacionForm}
+            
+            { path: "/hoteles/:id/habitaciones/nueva", name: "HabitacionForm", component: HabitacionForm},
+            
+            { path: "/hoteles/:id/habitaciones/:habitacionId/huespedes", name: "HuespedesList", component: HuespedesList},
+           //{ path: "/hoteles/:id/habitaciones/:habitacionId/huespedes/nuevo", name: "HuespedForm", component: HuespedForm}
         ],
         beforeEnter: async (to, from, next) => {
             try {

@@ -25,7 +25,7 @@ const useHabitacionesStore = defineStore("habitaciones", {
         },
 
         async deleteHabitacion(idHotel, idHabitacion) {
-            await axiosClient.delete(`/api/hoteles/${idHotel}/${idHabitacion}`);
+            await axiosClient.delete(`/api/hoteles/${idHotel}/habitaciones/${idHabitacion}`);
             this.habitaciones = this.habitaciones.filter(habitacion => habitacion.id !== idHabitacion);
         }
     }

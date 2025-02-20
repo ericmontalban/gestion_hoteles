@@ -20,17 +20,16 @@ const nuevaHabitacion = ref({
 })
 
 async function agregarHabitacion () {
-  /*
     if (!nuevaHabitacion.value.numero || !nuevaHabitacion.value.precio_por_noche) {
         errorMessage.value = "Por favor, rellena al menos el número de habitación y el precio por noche.";
         return;
     }
-    */
+    
     await habitacionesStore.addHabitacion(hotelId, nuevaHabitacion.value);
     successMessage.value = "Habitación agregada con éxito";
     setTimeout(() => {
         router.push(`/hoteles/${hotelId}/habitaciones`);
-    }, 1000)
+    }, 500)
 }
 </script>
 

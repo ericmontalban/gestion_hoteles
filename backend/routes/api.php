@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HabitacionController;
+use App\Http\Controllers\HuespedController;
 
 Route::middleware(['auth:sanctum'])
     ->group(function () {
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/hoteles/{hotelId}/habitaciones', [Habit
 Route::middleware('auth:sanctum')->post('/hoteles/{hotelId}/habitaciones', [HabitacionController::class, 'store']);
 Route::middleware('auth:sanctum')->delete('/hoteles/{hotelId}/habitaciones/{habitacionId}', [HabitacionController::class, 'destroy']);
 
+Route::middleware('auth:sanctum')->get('/hoteles/{hotelId}/habitaciones/{habitacionId}/huespedes', [HuespedController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/hoteles/{hotelId}/habitaciones/{habitacionId}/huespedes', [HuespedController::class, 'store']);
+Route::middleware('auth:sanctum')->delete('/hoteles/{hotelId}/habitaciones/{habitacionId}/huespedes/{huespedId}', [HuespedController::class, 'destroy']);
