@@ -22,6 +22,7 @@ onMounted(async() => {
 });
 
 async function eliminarHuesped(huespedId) {
+    console.log("hotel " + hotelId + "habitacion " + habitacionId + "huesped " + huespedId);
     await huespedesStore.deleteHuesped(hotelId, habitacionId, huespedId);
 }
 
@@ -44,15 +45,15 @@ async function eliminarHuesped(huespedId) {
         </router-link>
   
         <!-- Botón para agregar una nueva habitación -->
-        <router-link :to="`/hoteles/${hotelId}/habitaciones/${habitacionId}/huespedes/nuevo`" class="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
+        <router-link :to="`/hoteles/${hotelId}/habitaciones/${habitacionId}/huespedes/nuevo`" class="block mt-4 mb-2 text-center bg-blue-500 text-white px-4 py-2 rounded">
           Agregar Huésped
         </router-link>
   
         <!-- Si hay huéspedes, los muestra -->
         <div v-if="huespedesStore.huespedes.length > 0">
-          <div v-for="huesped in huespedesStore.huespedes" :key="huesped.id" class="p-4 border mb-2 rounded shadow">
-            <h3 class="text-lg font-bold">Huesped: {{ huesped.nombre }}</h3>
-  
+          <div v-for="huesped in huespedesStore.huespedes" :key="huesped.id" class="p-4 border mb-1 rounded shadow">
+            <h3 class="text-lg font-bold">Huesped: {{ huesped.nombre }} {{ huesped.apellido }} </h3>
+            <p>DNI/Pasaporte: {{ huesped.dniPasaporte }}</p> 
             <!-- Botones de acción -->
             <div class="mt-2">
               <button @click="eliminarHuesped(huesped.id)" class="bg-red-500 text-white px-4 py-2 rounded">

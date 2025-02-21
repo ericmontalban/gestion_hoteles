@@ -31,9 +31,9 @@ class HuespedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $habitacionId)
+    public function store(Request $request, $hotelId, $habitacionId)
     {
-         $request->validate([
+        $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'dniPasaporte' => 'required|string|max:255',
@@ -41,17 +41,14 @@ class HuespedController extends Controller
             'fecha_check_out' => 'required|date|after:fecha_check_in',
         ]);
 
-        // Crear una nueva instancia del modelo Huesped
-        $huesped = new Huesped();
-
-        // Llenar el modelo con los datos del request
-        $huesped->fill($request->all());
-
-        // Asignar manualmente el habitacion_id porque no viene en el request
-        $huesped->habitacion_id = $habitacionId;
-
-        // Guardar el modelo en la base de datos
-        $huesped->save();
+        $huesped = Huesped::create([
+            'habitacion_id' => $habitacionId,
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'dniPasaporte' => $request->dniPasaporte,
+            'fecha_check_in' => $request->fecha_check_in,
+            'fecha_check_out' => $request->fecha_check_out
+        ]);
 
         // Retornar la respuesta con el objeto creado y el código 201 (CREATED)
         return response()->json($huesped, 201);
@@ -84,7 +81,7 @@ class HuespedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($habitacionId, $huespedId)
+    public function destroy($hotelId, $habitacionId, $huespedId)
     {   
         // Filtra los huéspedes para que solo se busquen dentro de la habitación especificada
         // SELECT * FROM huespeds WHERE habitacion_id = $habitacionId;

@@ -15,7 +15,8 @@ const useHuespedesStore = defineStore("huespedes", {
             this.loading = false;
         },
 
-        async addHuespedes(idHotel, idHabitacion, nuevoHuesped) {
+        async addHuesped(idHotel, idHabitacion, nuevoHuesped) {
+            console.log("Enviando datos:", nuevoHuesped);
             const response = await axiosClient.post(`/api/hoteles/${idHotel}/habitaciones/${idHabitacion}/huespedes`, nuevoHuesped);
             this.huespedes.push(response.data);
         },

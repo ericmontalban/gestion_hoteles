@@ -10,7 +10,7 @@ import HotelForm from "./pages/hoteles/HotelForm.vue";
 import HotelEdit from "./pages/hoteles/HotelEdit.vue";
 import HabitacionForm from "./pages/habitaciones/HabitacionForm.vue";
 import HuespedesList from "./pages/huespedes/HuespedesList.vue";
-//import HuespedForm from "./pages/huespedes/HuespedForm.vue";
+import HuespedForm from "./pages/huespedes/HuespedForm.vue";
 
 const routes = [
     {
@@ -29,8 +29,9 @@ const routes = [
             { path: "/hoteles/:id/habitaciones/nueva", name: "HabitacionForm", component: HabitacionForm},
             
             { path: "/hoteles/:id/habitaciones/:habitacionId/huespedes", name: "HuespedesList", component: HuespedesList},
-           //{ path: "/hoteles/:id/habitaciones/:habitacionId/huespedes/nuevo", name: "HuespedForm", component: HuespedForm}
+            { path: "/hoteles/:id/habitaciones/:habitacionId/huespedes/nuevo", name: "HuespedForm", component: HuespedForm}
         ],
+
         beforeEnter: async (to, from, next) => {
             try {
                 const userStore = useUserStore();
