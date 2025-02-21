@@ -39,30 +39,44 @@ async function eliminarHabitacion (habitacionId) {
 
     <!-- Solo mostrar contenido si la carga ha terminado -->
     <div v-else>
-      <h2 class="text-2xl font-bold mb-4">Hotel {{ nombreHotel }}</h2>
+      <div class="flex flex-col justify-center items-center mb-8">
+        <h2 class="text-3xl font-bold mb-4 text-center">Hotel {{ nombreHotel }}</h2>
+          <div class="flex flex-row gap-4">
+            <!-- Botón para volver a la lista de hoteles -->
+            <router-link to="/hoteles" class="w-56 mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
+              Volver a Hoteles
+            </router-link>
 
-      <!-- Botón para volver a la lista de hoteles -->
-      <router-link to="/hoteles" class="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
-        Ver Hoteles
-      </router-link>
-
-      <!-- Botón para agregar una nueva habitación -->
-      <router-link :to="`/hoteles/${hotelId}/habitaciones/nueva`" class="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
-        Agregar Habitación
-      </router-link>
+            <!-- Botón para agregar una nueva habitación -->
+            <router-link :to="`/hoteles/${hotelId}/habitaciones/nueva`" class="flex justify-center items-center w-56 mt-4 text-center bg-blue-500 text-white px-4 rounded">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              
+              Agregar Habitación
+            </router-link>
+          </div>
+      </div>
 
       <!-- Si hay habitaciones, las muestra -->
-      <div v-if="habitacionesStore.habitaciones.length > 0">
-        <div v-for="habitacion in habitacionesStore.habitaciones" :key="habitacion.id" class="p-4 border mb-2 rounded shadow">
+      <div v-if="habitacionesStore.habitaciones.length > 0" class="mt-6 grid grid-cols-4 gap-4">
+        <div v-for="habitacion in habitacionesStore.habitaciones" :key="habitacion.id" class="p-4 border mb-2 rounded shadow text-center">
           <h3 class="text-lg font-bold">Habitacion: {{ habitacion.numero }}</h3>
           <p>Precio por noche: {{ habitacion.precio_por_noche }}€</p>
 
           <!-- Botones de acción -->
           <div class="mt-2">
-            <button @click="editarHabitacion(habitacion.id)" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">
+            <button @click="editarHabitacion(habitacion.id)" class="bg-blue-500 text-white px-4 py-2 rounded mr-2 w-24">
               Editar
             </button>
-            <button @click="eliminarHabitacion(habitacion.id)" class="bg-red-500 text-white px-4 py-2 rounded">
+            <button @click="eliminarHabitacion(habitacion.id)" class="bg-red-500 text-white px-4 py-2 rounded w-24">
               Eliminar
             </button>
           </div>

@@ -15,7 +15,7 @@
           .then(response => {
             axiosClient.post("/login", data.value)
               .then(response => {
-                router.push({name: 'Home'})
+                router.push("/hoteles")
               })
               .catch(error => {
                 console.log(error.response)

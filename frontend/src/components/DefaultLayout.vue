@@ -19,12 +19,12 @@ function logout() {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- Navbar -->
+  <!-- Ajustamos a pantalla completa -->
+  <div class="w-full min-h-screen flex flex-col bg-grey-500">
+    <!-- Barra superior -->
     <nav class="w-full bg-gray-800 text-white p-4 flex justify-between items-center">
       <span class="text-lg font-semibold">Gestión de Hoteles</span>
 
-      <!-- Mostrar usuario y botón de logout si hay sesión activa -->
       <div v-if="user" class="flex items-center space-x-4">
         <span class="text-sm">{{ user.name }}</span>
         <button 
@@ -35,14 +35,15 @@ function logout() {
       </div>
     </nav>
 
-    <!-- Contenido de la página -->
-    <div class="flex-grow p-4">
+    <!-- Contenido principal -->
+    <main class="flex-grow w-full px-8 py-6">
       <RouterView />
-    </div>
+    </main>
   </div>
 </template>
 
 <style scoped>
+
 nav a {
   text-decoration: none;
   font-weight: bold;
@@ -52,4 +53,5 @@ nav a {
 nav a:hover {
   color: #007bff;
 }
+
 </style>

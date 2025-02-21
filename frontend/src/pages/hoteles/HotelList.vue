@@ -32,24 +32,42 @@ const editarHotel = (id) => {
     </div>
 
     <div v-else>
-      <h2 class="text-2xl font-bold mb-4">Gestión de Hoteles</h2>
-      <!-- Botón para agregar un nuevo hotel -->
-      <router-link to="/hoteles/nuevo" class="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
-        Agregar Hotel
-      </router-link>
+      <div class="flex flex-col justify-center items-center gap-4 mb-4">
+        <h2 class="text-3xl font-bold">Hoteles</h2>
+        <!-- Botón para agregar un nuevo hotel -->
+          <router-link
+            to="/hoteles/nuevo"
+            class="inline-flex items-center bg-blue-500 text-white px-4 py-2 rounded shadow 
+                  hover:bg-blue-600 transition-colors duration-300"
+          >
+          <!-- Pequeño ícono de "más" (ejemplo con Heroicons) -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          Agregar Hotel
+        </router-link>
+      </div>
+      
       <!-- Si hay hoteles registrados mostrar listado de hoteles -->
-      <div v-if="hotelesStore.hoteles.length > 0">
-        <div v-for="hotel in hotelesStore.hoteles" :key="hotel.id" class="p-4 border mb-2 rounded shadow">
+      <div v-if="hotelesStore.hoteles.length > 0" class="mt-6 grid grid-cols-4 gap-4">
+        <div v-for="hotel in hotelesStore.hoteles" :key="hotel.id" class="p-4 border mb-2 rounded shadow flex flex-col items-center text-center">
           <h3 class="text-lg font-semibold">{{ hotel.nombre }}</h3>
           <p>{{ hotel.direccion }}</p>
           <p><strong>Teléfono:</strong> {{ hotel.telefono }}</p>
 
           <!-- Botones de acción -->
           <div class="mt-2">
-            <button @click="editarHotel(hotel.id)" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">
+            <button @click="editarHotel(hotel.id)" class="bg-blue-500 text-white px-4 py-2 rounded w-24 mr-2 hover:bg-blue-600">
               Editar
             </button>
-            <button @click="eliminarHotel(hotel.id)" class="bg-red-500 text-white px-4 py-2 rounded">
+            <button @click="eliminarHotel(hotel.id)" class="bg-red-500 text-white px-4 py-2 rounded w-24 hover:bg-red-600">
               Eliminar
             </button>
           </div>
@@ -60,7 +78,5 @@ const editarHotel = (id) => {
       <p v-else class="text-center text-gray-500">No hay hoteles registrados.</p>
 
     </div>
-
-    
   </div>
 </template>

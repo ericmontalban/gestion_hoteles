@@ -37,23 +37,34 @@ async function eliminarHuesped(huespedId) {
   
       <!-- Solo mostrar contenido si la carga ha terminado -->
       <div v-else>
-        <h2 class="text-2xl font-bold mb-4">Habitación {{ numeroHabitacion }}</h2>
-  
-        <!-- Botón para volver a la lista de habitaciones del hotel -->
-        <router-link :to="`/hoteles/${hotelId}/habitaciones`" class="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
-          Volver a Habitaciones
-        </router-link>
-  
-        <!-- Botón para agregar una nueva habitación -->
-        <router-link :to="`/hoteles/${hotelId}/habitaciones/${habitacionId}/huespedes/nuevo`" class="block mt-4 mb-2 text-center bg-blue-500 text-white px-4 py-2 rounded">
-          Agregar Huésped
-        </router-link>
+        <h2 class="text-2xl font-bold mb-4 text-center">Habitación {{ numeroHabitacion }}</h2>
+          <div class="flex flex-row gap-4 justify-center">
+            <!-- Botón para volver a la lista de habitaciones del hotel -->
+            <router-link :to="`/hoteles/${hotelId}/habitaciones`" class="w-56 mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">
+              Volver a Habitaciones
+            </router-link>
+      
+            <!-- Botón para agregar una nueva habitación -->
+            <router-link :to="`/hoteles/${hotelId}/habitaciones/${habitacionId}/huespedes/nuevo`" class="flex justify-center items-center w-56 mt-4 text-center bg-blue-500 text-white px-4 rounded">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Agregar Huésped
+            </router-link>
+          </div>
   
         <!-- Si hay huéspedes, los muestra -->
-        <div v-if="huespedesStore.huespedes.length > 0">
-          <div v-for="huesped in huespedesStore.huespedes" :key="huesped.id" class="p-4 border mb-1 rounded shadow">
-            <h3 class="text-lg font-bold">Huesped: {{ huesped.nombre }} {{ huesped.apellido }} </h3>
-            <p>DNI/Pasaporte: {{ huesped.dniPasaporte }}</p> 
+        <div v-if="huespedesStore.huespedes.length > 0" class="mt-6 grid grid-cols-4 gap-4">
+          <div v-for="huesped in huespedesStore.huespedes" :key="huesped.id" class="p-4 border mb-1 rounded shadow text-center">
+            <h3 class="text-lg font-bold">Huésped: {{ huesped.nombre }} {{ huesped.apellido }} </h3>
+            <h3 class="text-lg ">DNI/Pasaporte: {{ huesped.dniPasaporte }}</h3> 
             <!-- Botones de acción -->
             <div class="mt-2">
               <button @click="eliminarHuesped(huesped.id)" class="bg-red-500 text-white px-4 py-2 rounded">

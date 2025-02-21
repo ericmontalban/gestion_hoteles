@@ -42,7 +42,7 @@ async function agregarHabitacion () {
             {{errorMessage}}
         </div>
 
-        <form @submit.prevent="agregarHabitacion" class="space-y-4">
+        <form @submit.prevent="agregarHabitacion" class="space-y-4 mt-4">
             <input v-model="nuevaHabitacion.numero" placeholder="Número de habitación" class="border p-2 w-full" />
             <input v-model="nuevaHabitacion.tipo" placeholder="Tipo de habitación" class="border p-2 w-full" />
             <input v-model="nuevaHabitacion.precio_por_noche" type="number" placeholder="Precio" class="border p-2 w-full" />
