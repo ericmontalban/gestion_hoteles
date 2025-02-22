@@ -21,6 +21,11 @@ async function agregarHuesped() {
     await huespedesStore.addHuesped(idHotel, idHabitacion, nuevoHuesped.value);
     router.push(`/hoteles/${idHotel}/habitaciones/${idHabitacion}/huespedes`);
 }
+
+function cancelar() {
+    router.push( {name:'HuespedesList'} );
+}
+
 </script>
 
 <template>
@@ -61,7 +66,12 @@ async function agregarHuesped() {
                 Fecha check-out
                 </label>
             </div>
-            <button type="submit" class="bg-blue-500 text-white rounded">Agregar huesped</button>
+            <button type="submit" class="bg-blue-500 text-white rounded w-40 mr-2">Añadir huésped</button>
+
+            <button @click="cancelar" class="bg-red-500 text-white rounded w-40">
+                Cancelar
+            </button>
+
        </form> 
 
    </div>

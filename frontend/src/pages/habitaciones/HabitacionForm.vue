@@ -16,7 +16,7 @@ const successMessage = ref("");
 const nuevaHabitacion = ref({
     numero: "",
     tipo: "",
-    precio_por_noche: 0
+    precio_por_noche: "",
 })
 
 async function agregarHabitacion () {
@@ -31,13 +31,15 @@ async function agregarHabitacion () {
         router.push(`/hoteles/${hotelId}/habitaciones`);
     }, 500)
 }
+
+function cancelar() {
+    router.push({name:'HotelEdit'});
+}
+
 </script>
 
 <template>
     <div class="container mx-auto p-4">
-        <!-- Formulario para agregar una habitación -->
-        <h3 class="text-xl">Agregar Habitacion</h3>
-
         <div v-if="errorMessage" class="mt-4 mb-4 py-2 px-3 rounded text-white bg-red-400">
             {{errorMessage}}
         </div>
@@ -47,7 +49,12 @@ async function agregarHabitacion () {
             <input v-model="nuevaHabitacion.tipo" placeholder="Tipo de habitación" class="border p-2 w-full" />
             <input v-model="nuevaHabitacion.precio_por_noche" type="number" placeholder="Precio" class="border p-2 w-full" />
 
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Agregar Habitacion</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Añadir Habitacion</button>
+
+            <button @click="cancelar" class="bg-red-500 text-white px-4 py-2 rounded w-40">
+                Cancelar
+            </button> 
+
         </form>
     </div>
     <div v-if="successMessage" class="mt-4 mb-4 py-2 px-3 rounded text-white bg-green-400">

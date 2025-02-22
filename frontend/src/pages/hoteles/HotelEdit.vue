@@ -40,7 +40,7 @@ async function eliminarHabitacion (habitacionId) {
     <!-- Solo mostrar contenido si la carga ha terminado -->
     <div v-else>
       <div class="flex flex-col justify-center items-center mb-8">
-        <h2 class="text-3xl font-bold mb-4 text-center">Hotel {{ nombreHotel }}</h2>
+        <h2 class="text-3xl font-bold mb-2 text-center">Hotel {{ nombreHotel }}</h2>
           <div class="flex flex-row gap-4">
             <!-- Botón para volver a la lista de hoteles -->
             <router-link to="/hoteles" class="w-56 mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded">

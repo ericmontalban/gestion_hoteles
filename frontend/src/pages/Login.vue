@@ -84,7 +84,7 @@
           
           <!-- Link de Registro -->
           <p class="text-sm text-center text-gray-600 dark:text-gray-400">
-            ¿No tienes cuenta? <a href="#" class="text-blue-500 hover:underline">Regístrate</a>
+            ¿No tienes cuenta? <router-link to="/signup" class="text-blue-500 hover:underline">Regístrate</router-link>
           </p>
         </form>
       </div>

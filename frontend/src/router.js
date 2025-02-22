@@ -16,15 +16,13 @@ const routes = [
     {
         path:"/",
         component: DefaultLayout,
-        children: [ // la pagina home "/"" y "/images" comparten el mismo componente: DefaultLayout
+        children: [ // Todas las páginas en children comparten/heredan el mismo componente: DefaultLayout --> header
                     // Esto es especialmente util para que todas las paginas hereden de una que muestre 
                     // el footer, el header, etc
-            {path: '/', name: 'Home', component: Home},
-
             // Agregamos la gestión de hoteles dentro del DefaultLayout
             { path: "/hoteles", name: "HotelList", component: HotelList},
             { path: "/hoteles/nuevo", name: "HotelForm", component: HotelForm},
-            { path: "/hoteles/:id/habitaciones", name: "HotelEdit", component: HotelEdit}, // :id es un parametro dinamico que representa el hotel a editar
+            { path: "/hoteles/:id/habitaciones", name: "HotelEdit", component: HotelEdit}, // :id es un parametro dinamico que representa el id del hotel a editar
             
             { path: "/hoteles/:id/habitaciones/nueva", name: "HabitacionForm", component: HabitacionForm},
             
@@ -47,18 +45,6 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
-        /*
-        // Guardia de navegación: se ejecuta antes de entrar a esta ruta
-        beforeEnter: (to, from, next) => {
-        const userStore = useUserStore();  // Obtiene el store de usuario desde Pinia
-
-        if (userStore.user) { // Si el usuario está autenticado...
-            return next({ name: "Home" }); // Redirigirlo a la página principal
-        }
-
-        next(); // Si no está autenticado, permitirle ver el login
-        }
-        */
     },
     {
         path: '/signup',
